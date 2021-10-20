@@ -1,7 +1,9 @@
+const bcrypt = require('bcryptjs');
+
 const User = require("../models/user");
 
 const loginUser = (req, res) => {
-  const { email, password } = req.body;
+  const { email, name, password } = req.body;
 
   res.json({
     ok: true,
@@ -14,7 +16,8 @@ const loginUser = (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-  const { email } = req.body;
+  const { email, name, password } = req.body;
+
   try {
     let user = await User.findOne({ email });
 
@@ -25,7 +28,14 @@ const registerUser = async (req, res) => {
       });
     }
 
-    user = new User(req.body);
+    const salt = bcrypt.genSaltSync();
+    const hash = bcrypt.hashSync(password, salt);
+
+    user = new User({
+      email,
+      name,
+      password: hash,
+    });
     await user.save();
 
     return res.status(201).json({
