@@ -1,3 +1,5 @@
+const User = require("../models/user");
+
 const loginUser = (req, res) => {
   const { email, password } = req.body;
 
@@ -11,18 +13,22 @@ const loginUser = (req, res) => {
   });
 };
 
-const registerUser = (req, res) => {
-  const { name, email, password } = req.body;
+const registerUser = async (req, res) => {
+  try {
+    const user = new User(req.body);
 
-  res.status(201).json({
-    ok: true,
-    msg: 'register',
-    data: {
-      name,
-      email,
-      password
-    },
-  });
+    await user.save();
+
+    res.status(201).json({
+      ok: true,
+      msg: 'New user registered',
+    });
+  } catch (err) {
+    res.status(409).json({
+      ok: false,
+      msg: 'User already exists'
+    });
+  }
 };
 
 const renewToken = (req, res) => {
