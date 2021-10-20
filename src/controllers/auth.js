@@ -14,19 +14,32 @@ const loginUser = (req, res) => {
 };
 
 const registerUser = async (req, res) => {
+  const { email } = req.body;
   try {
-    const user = new User(req.body);
+    let user = await User.findOne({ email });
 
+    if (user) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'User already exists',
+      });
+    }
+
+    user = new User(req.body);
     await user.save();
 
-    res.status(201).json({
+    return res.status(201).json({
       ok: true,
       msg: 'New user registered',
+      data: {
+        uid: user.id,
+        name: user.name,
+      },
     });
   } catch (err) {
-    res.status(409).json({
+    return res.status(500).json({
       ok: false,
-      msg: 'User already exists'
+      msg: 'Please, contact with the administrator',
     });
   }
 };
