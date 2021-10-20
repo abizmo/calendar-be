@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 const User = require("../models/user");
+const { getToken } = require('../utils/jwt');
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -24,14 +25,17 @@ const loginUser = async (req, res) => {
       });
     }
 
+    const token = await getToken({
+      uid: user.id,
+      name: user.name,
+    });
+
     return res.status(200).json({
       ok: true,
       msg: 'User logged in',
-      data: {
-        uid: user.id,
-        name: user.name,
-      },
+      token,
     });
+
   } catch (err) {
     console.log(err);
     return res.status(500).json({
@@ -64,14 +68,17 @@ const registerUser = async (req, res) => {
     });
     await user.save();
 
+    const token = await getToken({
+      uid: user.id,
+      name: user.name,
+    });
+
     return res.status(201).json({
       ok: true,
       msg: 'New user registered',
-      data: {
-        uid: user.id,
-        name: user.name,
-      },
+      token,
     });
+
   } catch (err) {
     return res.status(500).json({
       ok: false,
