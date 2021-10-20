@@ -2,17 +2,43 @@ const bcrypt = require('bcryptjs');
 
 const User = require("../models/user");
 
-const loginUser = (req, res) => {
-  const { email, name, password } = req.body;
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
 
-  res.json({
-    ok: true,
-    msg: 'login',
-    data: {
-      email,
-      password,
-    },
-  });
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'Email/password not exist',
+      });
+    }
+
+    const validPassword = bcrypt.compareSync(password, user.password);
+
+    if (!validPassword) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'Email/password not exist',
+      });
+    }
+
+    return res.status(200).json({
+      ok: true,
+      msg: 'User logged in',
+      data: {
+        uid: user.id,
+        name: user.name,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      ok: false,
+      msg: 'Please, contact with the administrator',
+    });
+  }
 };
 
 const registerUser = async (req, res) => {
