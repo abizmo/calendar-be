@@ -1,0 +1,2 @@
+GET http://localhost:8080/api/auth/renew HTTP/1.1
+X-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTcwN2NjNGNhM2JhZTYxYTdmYjlhZGYiLCJuYW1lIjoidGVzdDEiLCJpYXQiOjE2MzQ4Mzk1NTAsImV4cCI6MTYzNDg0Njc1MH0.VauH0JTfoT83TiAy2aURlEdN2h2mByoNHSFVanjofKQ

@@ -3,6 +3,7 @@ const { body } = require('express-validator');
 
 const controller = require('../controllers/auth');
 const fieldsValidator = require('../middlewares/fieldsValidator');
+const tokenValidation = require('../middlewares/tokenValidation');
 
 router.post(
   '/register',
@@ -25,6 +26,6 @@ router.post(
   controller.loginUser
 );
 
-router.get('/renew', controller.renewToken);
+router.get('/renew', tokenValidation, controller.renewToken);
 
 module.exports = router;
