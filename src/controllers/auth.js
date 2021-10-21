@@ -87,11 +87,23 @@ const registerUser = async (req, res) => {
   }
 };
 
-const renewToken = (req, res) => {
-  res.json({
-    ok: true,
-    msg: 'renew',
-  });
+const renewToken = async (req, res) => {
+  const { uid, name } = req.user;
+
+  try {
+    const token = await getToken({ uid, name });
+
+    res.json({
+      ok: true,
+      msg: 'renew',
+      token,
+    });
+  } catch (err) {
+    res.status(500).json({
+      ok: false,
+      msg: 'Please, contact with the administrator',
+    });
+  }
 };
 
 module.exports = {

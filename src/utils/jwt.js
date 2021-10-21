@@ -17,6 +17,19 @@ const getToken = (data) => {
   });
 };
 
+const verifyToken = (token) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const { uid, name } = jwt.verify(token, process.env.JWT_SECRET);
+
+      resolve({ uid, name });
+    } catch(err) {
+      reject(err);
+    }
+  });
+};
+
 module.exports = {
   getToken,
+  verifyToken,
 };
