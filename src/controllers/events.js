@@ -25,14 +25,27 @@ const createOne = async (req, res) => {
   }
 };
 
-const deleteById = (req, res) => {
+const deleteById = async (req, res) => {
   const { eventId } = req.params;
 
-  res.status(204).json({
-    ok: true,
-    msg: 'Event deleted',
-    eventId,
-  });
+  try {
+    const event = await Event.findByIdAndRemove(eventId);
+  
+    if (!event) {
+      return res.status(404).json({
+        ok: false,
+        msg: 'Event not found',
+      });
+    }
+
+    res.status(204);
+  } catch (err) {
+     res.status(500).json({
+      ok: false,
+      msg: 'Error: Event can not be deleted',
+      error: err,
+    });   
+  }
 };
 
 const getAll = async (req, res) => {
