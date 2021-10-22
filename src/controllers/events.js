@@ -27,9 +27,10 @@ const createOne = async (req, res) => {
 
 const deleteById = async (req, res) => {
   const { eventId } = req.params;
+  const { uid } = req.user;
 
   try {
-    const event = await Event.findByIdAndRemove(eventId);
+    const event = await Event.findById(eventId);
   
     if (!event) {
       return res.status(404).json({
@@ -38,7 +39,16 @@ const deleteById = async (req, res) => {
       });
     }
 
-    res.status(204);
+    if (event.user.toString() !== uid) {
+      return res.status(401).json({
+        ok: false,
+        msg: 'Authorization has been refused',
+      });
+    }
+
+    await Event.deleteOne({ _id: eventId });
+
+    res.status(204).send();
   } catch (err) {
      res.status(500).json({
       ok: false,

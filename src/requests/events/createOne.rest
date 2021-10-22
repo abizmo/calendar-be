@@ -1,10 +1,10 @@
 POST http://localhost:8080/api/events HTTP/1.1
-X-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTcwN2NjNGNhM2JhZTYxYTdmYjlhZGYiLCJuYW1lIjoidGVzdDEiLCJpYXQiOjE2MzQ5MDg2MzYsImV4cCI6MTYzNDkxNTgzNn0.FD6MWZj1WljooE3udE6nnF-Hmxy0TJgS7VeMZjPMcKo
+X-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTcwN2NjNGNhM2JhZTYxYTdmYjlhZGYiLCJuYW1lIjoidGVzdDEiLCJpYXQiOjE2MzQ5Mjc0MzgsImV4cCI6MTYzNDkzNDYzOH0.cRo-79LPndbv_ML_1YUkuP5vbNOi-Xuyh6bWR4pgmXM
 Content-Type: application/json
 
 {
-  "title": "New event 2",
-  "description": "Test event 2",
+  "title": "New event 3",
+  "description": "Test event 3",
   "start": 10000000,
   "end": 20000000
 }
