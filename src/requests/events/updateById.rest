@@ -1,7 +1,9 @@
-PUT http://localhost:8080/api/events/0456 HTTP/1.1
-X-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTcwN2NjNGNhM2JhZTYxYTdmYjlhZGYiLCJuYW1lIjoidGVzdDEiLCJpYXQiOjE2MzQ4NTIxNDYsImV4cCI6MTYzNDg1OTM0Nn0.hE8znKPA8rPGJF8L2OBPxKdWzp4om3nIS4hkmNb18CE
+PUT http://localhost:8080/api/events/6172b9f6074e1801c16a33a2 HTTP/1.1
+X-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTcwN2NjNGNhM2JhZTYxYTdmYjlhZGYiLCJuYW1lIjoidGVzdDEiLCJpYXQiOjE2MzQ5MDg2MzYsImV4cCI6MTYzNDkxNTgzNn0.FD6MWZj1WljooE3udE6nnF-Hmxy0TJgS7VeMZjPMcKo
 Content-Type: application/json
 
 {
-  "title": "Modified"
+  "title": "Event modified again only title",
+  "start": 10000000,
+  "end": 20000000
 }

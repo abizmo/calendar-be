@@ -21,7 +21,16 @@ router.post(
   eventCtrl.createOne
 );
 
-router.put('/:eventId', eventCtrl.updateById);
+router.put(
+  '/:eventId',
+  [
+    body('title', 'Title is required').notEmpty(),
+    body('start', 'Start has to be a valid date').custom(isDate),
+    body('end', 'End has to be a valid date').custom(isDate),
+    fieldsValidator,
+  ],
+  eventCtrl.updateById
+);
 
 router.delete('/:eventId', eventCtrl.deleteById);
 

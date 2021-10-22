@@ -56,16 +56,47 @@ const getAll = async (req, res) => {
   }
 };
 
-const updateById = (req, res) => {
-  const { body: data } = req;
+const updateById = async (req, res) => {
+  const { description, end, start, title } = req.body;
+  const { uid } = req.user;
   const { eventId } = req.params;
 
-  res.status(202).json({
-    ok: true,
-    msg: 'Event updated',
-    data,
-    eventId,
-  });
+  try {
+    const event = await Event.findById(eventId);
+
+    if (!event) {
+      res.status(404).json({
+        ok: false,
+        msg: 'Event not found',
+      });
+    }
+
+    if (event.user.toString() !== uid) {
+      res.status(401).json({
+        ok: false,
+        msg: 'Authorization has been refused',
+      });
+    }
+
+    event.description = description || event.description;
+    event.end = end || event.end;
+    event.start = start || event.start;
+    event.title = title || event.title;
+
+    await event.save();
+
+    res.status(202).json({
+      ok: true,
+      msg: 'Event updated',
+      data: event,
+    });
+  } catch (err) {
+    res.status(500).json({
+      ok: false,
+      msg: 'Error: Event can not be updated',
+      error: err,
+    });
+  }
 };
 
 module.exports = {
