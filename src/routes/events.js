@@ -1,14 +1,28 @@
 const router = require('express').Router();
 
+const { body } = require('express-validator');
 const eventCtrl = require('../controllers/events');
+const fieldsValidator = require('../middlewares/fieldsValidator');
 const tokenValidation = require('../middlewares/tokenValidation');
+const isDate = require('../utils/isDate');
 
-router.get('/', tokenValidation, eventCtrl.getAll);
+router.use(tokenValidation);
 
-router.post('/', tokenValidation, eventCtrl.createOne);
+router.get('/', eventCtrl.getAll);
 
-router.put('/:eventId', tokenValidation, eventCtrl.updateById);
+router.post(
+  '/',
+  [
+    body('title', 'Title is required').notEmpty(),
+    body('start', 'Start has to be a valid date').custom(isDate),
+    body('end', 'End has to be a valid date').custom(isDate),
+    fieldsValidator,
+  ],
+  eventCtrl.createOne
+);
 
-router.delete('/:eventId', tokenValidation, eventCtrl.deleteById);
+router.put('/:eventId', eventCtrl.updateById);
+
+router.delete('/:eventId', eventCtrl.deleteById);
 
 module.exports = router;
