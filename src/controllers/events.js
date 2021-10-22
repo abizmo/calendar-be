@@ -39,7 +39,8 @@ const getAll = async (req, res) => {
   const { uid } = req.user;
 
   try {
-    const events = await Event.find({ user: uid });
+    const events = await Event.find({ user: uid })
+      .populate('user', { _id: 0, name: 1 });
     
     res.status(200).json({
       ok: true,
