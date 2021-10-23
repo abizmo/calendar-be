@@ -9,7 +9,7 @@ const eventsRouter = require('./routes/events');
 const app = express();
 const { PORT } = process.env;
 
-dbConnection();
+dbConnection().catch(console.log);
 
 app.use(cors());
 app.use(express.static('src/public'));
