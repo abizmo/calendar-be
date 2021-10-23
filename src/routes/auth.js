@@ -13,17 +13,17 @@ router.post(
     body('password', 'Password length has to be greater than 5').isLength({ min: 6 }),
     fieldsValidator,
   ],
-  authCtrl.registerUser
+  authCtrl.registerUser,
 );
 
 router.post(
-  '/login', 
+  '/login',
   [
     body('email', 'Email is required').isEmail(),
     body('password', 'Password length has to be greater than 5').isLength({ min: 6 }),
     fieldsValidator,
   ],
-  authCtrl.loginUser
+  authCtrl.loginUser,
 );
 
 router.get('/renew', tokenValidation, authCtrl.renewToken);

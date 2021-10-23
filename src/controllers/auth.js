@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const User = require("../models/user");
+const User = require('../models/user');
 const { getToken } = require('../utils/jwt');
 
 const loginUser = async (req, res) => {
@@ -35,7 +35,6 @@ const loginUser = async (req, res) => {
       msg: 'User logged in',
       token,
     });
-
   } catch (err) {
     return res.status(500).json({
       ok: false,
@@ -77,7 +76,6 @@ const registerUser = async (req, res) => {
       msg: 'New user registered',
       token,
     });
-
   } catch (err) {
     return res.status(500).json({
       ok: false,
@@ -109,4 +107,4 @@ module.exports = {
   loginUser,
   registerUser,
   renewToken,
-}
+};

@@ -1,4 +1,4 @@
-const Event = require("../models/event");
+const Event = require('../models/event');
 
 const createOne = async (req, res) => {
   const { body, user } = req;
@@ -31,7 +31,7 @@ const deleteById = async (req, res) => {
 
   try {
     const event = await Event.findById(eventId);
-  
+
     if (!event) {
       return res.status(404).json({
         ok: false,
@@ -48,13 +48,13 @@ const deleteById = async (req, res) => {
 
     await Event.deleteOne({ _id: eventId });
 
-    res.status(204).send();
+    return res.status(204).send();
   } catch (err) {
-     res.status(500).json({
+    return res.status(500).json({
       ok: false,
       msg: 'Error: Event can not be deleted',
       error: err,
-    });   
+    });
   }
 };
 
@@ -64,7 +64,7 @@ const getAll = async (req, res) => {
   try {
     const events = await Event.find({ user: uid })
       .populate('user', { _id: 0, name: 1 });
-    
+
     res.status(200).json({
       ok: true,
       msg: 'Got events',
@@ -80,7 +80,9 @@ const getAll = async (req, res) => {
 };
 
 const updateById = async (req, res) => {
-  const { description, end, start, title } = req.body;
+  const {
+    description, end, start, title,
+  } = req.body;
   const { uid } = req.user;
   const { eventId } = req.params;
 

@@ -18,7 +18,7 @@ router.post(
     body('end', 'End has to be a valid date').custom(isDate),
     fieldsValidator,
   ],
-  eventCtrl.createOne
+  eventCtrl.createOne,
 );
 
 router.put(
@@ -29,7 +29,7 @@ router.put(
     body('end', 'End has to be a valid date').custom(isDate),
     fieldsValidator,
   ],
-  eventCtrl.updateById
+  eventCtrl.updateById,
 );
 
 router.delete('/:eventId', eventCtrl.deleteById);

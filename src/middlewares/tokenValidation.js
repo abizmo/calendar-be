@@ -1,9 +1,8 @@
-const jwt = require('jsonwebtoken');
 const { verifyToken } = require('../utils/jwt');
 
 const tokenValidation = async (req, res, next) => {
-  const token = req.header('X-Authorization')
-  
+  const token = req.header('X-Authorization');
+
   if (!token) {
     return res.status(401).json({
       ok: false,
@@ -15,7 +14,7 @@ const tokenValidation = async (req, res, next) => {
     const user = await verifyToken(token);
 
     req.user = user;
-    next();
+    return next();
   } catch (err) {
     return res.status(500).json({
       ok: false,
