@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { body } = require('express-validator');
 
-const controller = require('../controllers/auth');
+const authCtrl = require('../controllers/auth');
 const fieldsValidator = require('../middlewares/fieldsValidator');
 const tokenValidation = require('../middlewares/tokenValidation');
 
@@ -13,7 +13,7 @@ router.post(
     body('password', 'Password length has to be greater than 5').isLength({ min: 6 }),
     fieldsValidator,
   ],
-  controller.registerUser
+  authCtrl.registerUser
 );
 
 router.post(
@@ -23,9 +23,9 @@ router.post(
     body('password', 'Password length has to be greater than 5').isLength({ min: 6 }),
     fieldsValidator,
   ],
-  controller.loginUser
+  authCtrl.loginUser
 );
 
-router.get('/renew', tokenValidation, controller.renewToken);
+router.get('/renew', tokenValidation, authCtrl.renewToken);
 
 module.exports = router;

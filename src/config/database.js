@@ -9,7 +9,6 @@ const dbConnection = async () => {
 
     console.log('DB Connect')
   } catch (err) {
-    console.log(err);
     throw new Error('Mongoose connect error');
   }
 }

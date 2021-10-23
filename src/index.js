@@ -4,6 +4,7 @@ const express = require('express');
 
 const { dbConnection } = require('./config/database');
 const authRouter = require('./routes/auth');
+const eventsRouter = require('./routes/events');
 
 const app = express();
 const { PORT } = process.env;
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.static('public'));
 app.use(express.json())
 app.use('/api/auth', authRouter);
+app.use('/api/events', eventsRouter);
 
 
 app.listen(PORT, () => {
