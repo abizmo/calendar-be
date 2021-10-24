@@ -25,15 +25,14 @@ const loginUser = async (req, res) => {
       });
     }
 
-    const token = await getToken({
-      uid: user.id,
-      name: user.name,
-    });
+    const { id: uid, name } = user;
+
+    const token = await getToken({ name, uid });
 
     return res.status(200).json({
       ok: true,
       msg: 'User logged in',
-      token,
+      data: { name, token, uid },
     });
   } catch (err) {
     return res.status(500).json({
