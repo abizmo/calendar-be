@@ -65,15 +65,13 @@ const registerUser = async (req, res) => {
     });
     await user.save();
 
-    const token = await getToken({
-      uid: user.id,
-      name: user.name,
-    });
+    const { id: uid } = user;
+    const token = await getToken({ name, uid });
 
     return res.status(201).json({
       ok: true,
       msg: 'New user registered',
-      token,
+      data: { name, token, uid },
     });
   } catch (err) {
     return res.status(500).json({
