@@ -14,7 +14,10 @@ const createOne = async (req, res) => {
     res.status(201).json({
       ok: true,
       msg: 'Event created',
-      data: event,
+      data: {
+        ...event.toJSON(),
+        user,
+      },
     });
   } catch (err) {
     res.status(500).json({
