@@ -31,5 +31,13 @@ Si quieren saber más sobre Node, recuerden que tengo un curso especializado en 
 - Validaciones personalizadas
 
 Aquí trabajaremos creando todo lo necesario para que podamos insertar, actualiza y eliminar información relacionada a los eventos que nuestra aplicación del calendario necesitará.
+## Section 26: Despliegue del backend en Heroku
+### ¿Qué veremos en esta sección?
+- Despliegues de Node hacia Heroku
+- Git
+- Generar nuestra aplicación de React para producción
+- Revisar LOGS de Heroku
+
+Es una sección corta pero enfocada en que puedan desplegar todo su trabajo en un hosting que les permita compartir todo su trabajo a cualquier persona y usar su aplicación en cualquier lugar del mundo.
 
 ---
