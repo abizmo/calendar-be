@@ -51,11 +51,14 @@ const deleteById = async (req, res) => {
 
     await Event.deleteOne({ _id: eventId });
 
-    return res.status(204).send();
+    return res.status(200).json({
+      ok: true,
+      msg: 'Event deleted',
+    });
   } catch (err) {
     return res.status(500).json({
       ok: false,
-      msg: 'Error: Event can not be deleted',
+      msg: 'Event can not be deleted',
       error: err,
     });
   }
