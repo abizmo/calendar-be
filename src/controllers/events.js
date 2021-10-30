@@ -116,7 +116,10 @@ const updateById = async (req, res) => {
     res.status(202).json({
       ok: true,
       msg: 'Event updated',
-      data: event,
+      data: {
+        ...event.toJSON(),
+        user: { ...req.user },
+      },
     });
   } catch (err) {
     res.status(500).json({
