@@ -1,5 +1,5 @@
 POST http://localhost:8080/api/events HTTP/1.1
-X-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTcwN2NjNGNhM2JhZTYxYTdmYjlhZGYiLCJuYW1lIjoidGVzdDEiLCJpYXQiOjE2MzQ5Mjc0MzgsImV4cCI6MTYzNDkzNDYzOH0.cRo-79LPndbv_ML_1YUkuP5vbNOi-Xuyh6bWR4pgmXM
+X-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDIiLCJ1aWQiOiI2MTcwODU2OWNiYzk0Yzk5OTRmNTI2NjUiLCJpYXQiOjE2MzUzNTc1OTgsImV4cCI6MTYzNTM2NDc5OH0.BheuyK2Qh4Y--JuIPMtaxaMzTEcjAGABFuG-A2_dXHg
 Content-Type: application/json
 
 {
